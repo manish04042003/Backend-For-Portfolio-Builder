@@ -40,39 +40,6 @@ app.post('/api/upload',upload.single('file'),imageupload);
 
 
 
-
-// only for checking 
-
-
-app.get('/checkupload', (req, res) => {
-    res.send(`
-      <h2>File Upload With <code>"Node.js"</code></h2>
-      <form action="/api/upload" enctype="multipart/form-data" method="post">
-        <div>Select a file: 
-          <input type="text" name="firstname"/>
-          <input type="file" name="file" multiple="multiple" />
-        </div>
-        <input type="submit" value="Upload" />
-      </form>
-    `);
-  });
-
-app.post('/checkusername', async (req,res)=>{
-    let {username} = req.body;
-    let check = await Users.findOne({username});
-    let message = (check?true:false); 
-    res.status(200).json({
-        message : message
-    })
-})
-
-
-app.get('/checktoken',authenticateToken,async(req,res)=>{
-    let username = req.data.username;
-    res.send(username);
-})
-
-
 app.listen(PORT_NO,()=>{
     console.log("server is nunning on port no " + PORT_NO);
 })
